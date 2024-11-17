@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pratim pare jarane</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>CASHH $$$</h1>
+        </div>
+
+        <!-- Counter for entering expenses -->
+        <div class="counter">
+            <button id="decrease" class="counter-btn">-</button>
+            <div id="counterValue" class="counter-value">0.50</div>
+            <button id="increase" class="counter-btn">+</button>
+        </div>
+
+        <!-- Balance selection -->
+        <div class="balance-selection">
+            <div id="walletBtn" class="balance-btn selected">Moje pare</div>
+            <div id="schoolBtn" class="balance-btn">Za skolu</div>
+        </div>
+
+        <!-- Balance display with in-place editing -->
+        <div class="balance-display">
+            <div id="walletBalance" class="balance">
+                Moje: <span id="walletAmount" class="editable">55.50</span> KM
+            </div>
+            <div id="schoolBalance" class="balance">
+                Babine: <span id="schoolAmount" class="editable">55.50</span> KM
+            </div>
+        </div>
+
+        <!-- Category selection -->
+        <div class="category-selector">
+            <label for="categorySelect">Kategorija: </label>
+            <select id="categorySelect">
+                <!-- Empty initially, categories added dynamically -->
+            </select>
+        </div>
+
+        <!-- Add new category -->
+        <div class="add-category">
+            <input type="text" id="newCategoryInput" placeholder="Enter new category" />
+            <button id="addCategoryBtn">Add Category</button>
+        </div>
+
+        <!-- Submit button to save expense -->
+        <button id="submitBtn">Klikni</button>
+
+        <!-- History section with two columns for wallet and school -->
+        <div class="history">
+            <div class="history-column" id="walletHistory">
+                <h3>Potrosnja Sirotinje</h3>
+            </div>
+            <div class="history-column" id="schoolHistory">
+                <h3>Potrosnja skole</h3>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Declare initial variables
+        let walletBalance = 55.50;
+        let schoolBalance = 55.50;
+        let selectedBalance = 'wallet'; // Default selected balance
+        let categories = []; // Array to store dynamically added categories
+
+        // Update balance display
+        function updateBalanceDisplay() {
+            document.getElementById('walletAmount').textContent = walletBalance.toFixed(2);
+            document.getElementById('schoolAmount').textContent = schoolBalance.toFixed(2);
+        }
+
+        // Handle balance selection
+        document.getElementById('walletBtn').addEventListener('click', function() {
+            selectedBalance = 'wallet';
+            document.getElementById('walletBtn').classList.add('selected');
+            document.getElementById('schoolBtn').classList.remove('selected');
+            updateBalanceDisplay();
+        });
+
+        document.getElementById('schoolBtn').addEventListener('click', function() {
+            selectedBalance = 'school';
+            document.getElementById('schoolBtn').classList.add('selected');
+            document.getElementById('walletBtn').classList.remove('selected');
+            updateBalanceDisplay();
+        });
+
+        // Handle expense counter
+        let counterValue = 0.50;
+        document.getElementById('increase').addEventListener('click', function() {
+            counterValue += 0.50;
+            document.getElementById('counterValue').textContent = counterValue.toFixed(2);
+        });
+
+        document.getElementById('decrease').addEventListener('click', function() {
+            if (counterValue > 0.50) {
+                counterValue -= 0.50;
+                document.getElementById('counterValue').textContent = counterValue.toFixed(2);
+            }
+        });
+
+        // Handle new category addition
+        document.getElementById('addCategoryBtn').addEventListener('click', function () {
+            const newCategory = document.getElementById('newCategoryInput').value.trim();
+            if (newCategory !== "" && !categories.includes(newCategory)) {
+                // Add category to the array
+                categories.push(newCategory);
+
+                // Create and append the new option in the dropdown
+                const newOption = document.createElement("option");
+                newOption.textContent = newCategory;
+                newOption.value = newCategory;
+                document.getElementById('categorySelect').appendChild(newOption);
+
+                // Clear the input field
+                document.getElementById('newCategoryInput').value = "";
+            }
+        });
+
+        // Handle submitting expense
+        document.getElementById('submitBtn').addEventListener('click', function() {
+            const amount = counterValue;
+            const selectedCategory = document.getElementById('categorySelect').value || "Uncategorized";
+
+            if (selectedBalance === 'wallet') {
+                walletBalance -= amount;
+                const historyEntry = document.createElement('div');
+                historyEntry.classList.add('history-entry');
+                historyEntry.innerHTML = `<div>${selectedCategory}</div><div>-${amount.toFixed(2)} KM</div>`;
+                document.getElementById('walletHistory').appendChild(historyEntry);
+            } else {
+                schoolBalance -= amount;
+                const historyEntry = document.createElement('div');
+                historyEntry.classList.add('history-entry');
+                historyEntry.innerHTML = `<div>${selectedCategory}</div><div>-${amount.toFixed(2)} KM</div>`;
+                document.getElementById('schoolHistory').appendChild(historyEntry);
+            }
+
+            updateBalanceDisplay();
+        });
+
+        // Make the balance editable when clicked (in-place editing)
+        document.querySelectorAll('.editable').forEach(element => {
+            element.addEventListener('click', function() {
+                const currentValue = parseFloat(element.textContent);
+                const newBalance = prompt("Enter new balance:", currentValue.toFixed(2));
+                if (newBalance && !isNaN(newBalance)) {
+                    if (element.id === 'walletAmount') {
+                        walletBalance = parseFloat(newBalance);
+                    } else if (element.id === 'schoolAmount') {
+                        schoolBalance = parseFloat(newBalance);
+                    }
+                    updateBalanceDisplay();
+                }
+            });
+        });
+
+        // Update balance display on page load
+        updateBalanceDisplay();
+    </script>
+</body>
+</html>

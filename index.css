@@ -1,0 +1,527 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f3f3f3;
+}
+
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.header h1 {
+    text-align: center;
+    font-size: 36px;
+    color: #2196F3;
+    margin-bottom: 30px;
+}
+
+.counter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.counter-btn {
+    padding: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+.counter-value {
+    font-size: 36px;
+    margin: 0 20px;
+}
+
+.balance-selection {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.balance-btn {
+    padding: 12px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 45%;
+    text-align: center;
+}
+
+.balance-btn:hover {
+    background-color: #45a049;
+}
+
+.balance-btn.selected {
+    background-color: #388E3C;
+}
+
+.balance-display {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.balance {
+    font-size: 36px;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 20px;
+    width: 45%;
+    text-align: center;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    background-color: #fafafa;
+}
+
+/* Labels above the numbers */
+.balance-label {
+    font-size: 16px;
+    font-weight: normal;
+    color: #555;
+    margin-bottom: 5px; /* Space between the label and number */
+}
+
+/* Make the main balance text larger */
+#walletAmount, #schoolAmount {
+    font-size: 72px;
+    display: inline-block;
+    line-height: 1.1;
+    position: relative;
+}
+
+/* Smaller font size for decimals */
+#walletAmount sup, #schoolAmount sup {
+    font-size: 20px; /* Smaller size for decimals */
+    position: relative;
+    top: -10px; /* Adjust vertical alignment */
+    color: #888; /* Light gray color for the decimal part */
+}
+
+/* Other styles... */
+.category-selector {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#categorySelect {
+    padding: 12px;
+    font-size: 18px;
+    width: 100%;
+    background-color: #fff;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+}
+
+#categorySelect option {
+    padding: 10px;
+}
+
+#submitBtn {
+    display: block;
+    margin: 20px auto;
+    padding: 15px 25px;
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+#submitBtn:hover {
+    background-color: #1e88e5;
+}
+
+.history {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.history-column {
+    width: 45%;
+}
+
+.history-column h3 {
+    text-align: center;
+    color: #333;
+}
+
+.history-entry {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.history-entry div {
+    font-size: 16px;
+}
+
+.subcategory-selector {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#foodSelect {
+    padding: 12px;
+    font-size: 18px;
+    width: 100%;
+    background-color: #fff;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+}
+.history-entry {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    font-size: 16px;
+}
+
+.history-item {
+    width: 40%; /* Left column - item name */
+    text-align: left;
+}
+
+.history-amount {
+    width: 40%; /* Middle column - amount spent */
+    text-align: center;
+    font-weight: bold;
+    color: red; /* Red for spent amount */
+}
+
+.history-time {
+    width: 20%; /* Right column - time spent */
+    text-align: right;
+    color: #888; /* Lighter color for time */
+}
+/* Existing styles for header, counters, balance display, etc. */
+
+/* Status toggle for Moje pare and Babine */
+.status-toggle {
+    margin-bottom: 10px;
+}
+
+.status-label {
+    font-size: 1em;
+    margin-right: 10px;
+}
+
+.status-selector {
+    padding: 5px 10px;
+    font-size: 1em;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+/* Add new category section */
+.add-category {
+    margin-bottom: 20px;
+}
+
+.add-category input {
+    padding: 5px 10px;
+    font-size: 1em;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    margin-right: 10px;
+}
+
+.add-category button {
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.add-category button:hover {
+    background-color: #45a049;
+}
+
+/* Subcategory (for Food) */
+.subcategory-selector {
+    margin-bottom: 20px;
+}
+
+.subcategory-selector select {
+    padding: 5px 10px;
+    font-size: 1em;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.counter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.counter-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+}
+
+.counter-value {
+    margin: 0 15px;
+    font-size: 20px;
+}
+
+.balance-selection {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.balance-btn {
+    padding: 10px 20px;
+    margin: 0 10px;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.selected {
+    background-color: #4285F4;
+    color: white;
+}
+
+.balance-display {
+    margin-bottom: 20px;
+}
+
+.balance {
+    margin: 10px 0;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.balance input {
+    width: 100px;
+    text-align: right;
+}
+
+.hidden {
+    display: none;
+}
+
+.category-selector {
+    margin-bottom: 20px;
+}
+
+.add-category {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.add-category input {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.history {
+    display: flex;
+    justify-content: space-between;
+}
+
+.history-column {
+    flex: 1;
+    margin: 0 10px;
+    padding: 10px;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.history-entry {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+/* Prevent horizontal scroll on the body */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    overflow-x: hidden;  /* Prevent horizontal scroll */
+}
+
+/* Ensure the container doesn't overflow */
+.container {
+    max-width: 100%;  /* Make sure the container doesn't exceed the screen width */
+    margin: 50px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Balance display to prevent overflow */
+.balance-display {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    flex-wrap: wrap;  /* Allow wrapping if space is tight */
+    gap: 10px;  /* Space between the boxes */
+}
+
+/* Balance boxes with a max-width to ensure they fit side by side */
+.balance {
+    font-size: 36px;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 20px;
+    width: 45%;
+    max-width: 45%;  /* Limit width to prevent overflow */
+    text-align: center;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    background-color: #fafafa;
+}
+
+/* Mobile-specific adjustments */
+@media screen and (max-width: 768px) {
+    .balance-display {
+        flex-direction: column;  /* Stack the balance boxes vertically on small screens */
+        align-items: center;
+    }
+
+    .balance {
+        width: 90%;  /* Ensure the balance boxes take up most of the screen width */
+        max-width: 90%;  /* Limit width */
+        margin-bottom: 10px;  /* Add margin for separation */
+    }
+}
+/* General styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container {
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+/* Balance Section */
+.balance-section {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    align-items: center;
+}
+
+.balanceInput {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    background-color: transparent;
+    border: none;
+    width: 150px;
+    text-align: right;
+}
+
+.balanceInput:focus {
+    outline: none;
+    border-bottom: 2px solid #007BFF;
+}
+
+.balanceInput:disabled {
+    background-color: transparent;
+    cursor: pointer;
+}
+
+button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Mobile-friendly */
+@media (max-width: 600px) {
+    .container {
+        padding: 15px;
+        margin-top: 10px;
+    }
+
+    .balance-section {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .balanceInput {
+        font-size: 20px;
+        width: 120px;
+    }
+}
